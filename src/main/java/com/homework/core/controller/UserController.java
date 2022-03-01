@@ -29,8 +29,7 @@ import static com.homework.common.bean.ReturnT.FAIL_CODE;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
-    @Resource
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @GetMapping("/pageList")
     @ApiOperation("用户列表")
     public ReturnT<Map<String, Object>> pageList(@RequestParam(required = false, defaultValue = "1") int current,
@@ -53,7 +52,7 @@ public class UserController {
     public ReturnT<String> add(@RequestBody User user) {
         user.setUsername(user.getUsername().trim());
         user.setPassword(user.getPassword().trim());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         User existUser = userMapper.loadByUserName(user.getUsername());
         if (existUser != null) {
             return new ReturnT<>(FAIL_CODE, "user_username_repeat");
