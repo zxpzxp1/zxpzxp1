@@ -33,3 +33,11 @@ CREATE TABLE `t_user` (
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', 'admin', '$2a$10$2KCqRbra0Yn2TwvkZxtfLuWuUP5KyCWsljO/ci5pLD27pqR3TV1vy', 'ROLE_ADMIN', null);
+
+CREATE TABLE `t_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent` varchar(255) DEFAULT NULL COMMENT '父',
+  `msg` varchar(255) DEFAULT NULL COMMENT '留言板',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `i_username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
