@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--scan="true"开启对配置信息的自动扫描(默认时间为60秒扫描一次) 注:当此文件的配置信息发生变化时,此设置的作用就体现出来了,不需要重启服务-->
+<configuration scan="true">
+    <!-- 通过property标签,来存放key-value数据,便于后面的动态获取,提高程序的灵活性 -->
+    <property name="log-dir" value="logs"/>
+    <property name="log-name" value="orgrel"/>
+    <!--日志类型：系统日志-->
+    <property name="log-type-system" value="system"/>
+    <!--日志格式-->
+    <property name="log-patten" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%L- %msg%n"/>
+    <!--日志历史存储天数-->
+    <property name="log-max-history" value="7"/>
+    <!--日志单个文件大小限制-->
+    <property name="log-max-file-size" value="5MB"/>
+    <!--是否启动时清理日志， 设置为true时， rolling类型日志才会清洗，否则不会-->
+    <property name="log-clean-history-on-start" value="true"/>
+
+    <!-- 配置appender(可以配置多个) -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--指定输出的日志格式-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%L- %msg%n</pattern>
+            <!-- 日志编码 -->
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--
+        class:加载指定类(ch.qos.logback.core.rolling.RollingFileAppender类会将日志输出到>>>指定的文件中),
+        patter:指定输出的日志格式 file:指定存放日志的文件(如果无,则自动创建) rollingPolicy:滚动策略>>>每天结束时，都会将该天的日志存为指定的格式的文件
+        FileNamePattern：文件的全路径名模板 (注:如果最后结尾是gz或者zip等的话,那么会自动打成相应压缩包)
+        把日志文件输出到:当前磁盘下的log文件夹(无则自动创建)下： <file>/log/logFile.log</file>
+    -->
+    <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>系统日志 start<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+    <appender name="systemDebugFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- TimeBasedRollingPolicy策略会将过时的日志，另存到指定的文件中(无该文件则创建) -->
+            <!-- 把因为 过时 或 过大  而拆分后的文件也保存到目启动的目录下的log文件夹下  -->
+            <fileNamePattern>
+                ${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/debug/${log-name}-debug.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- 保存以最后一次日志为准,往前7天以内的日志文件，其他的自动删除 -->
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <!-- 滚动策略可以嵌套；主要目的是: 在每天都会拆分日志的前提下，当该天的日志大于规定大小时，也进行拆分并以【%i】进行区分，i从0开始-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <!-- 日志输出格式 -->
+            <pattern>${log-patten}</pattern>
+            <!-- 日志编码 -->
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--跟踪日志-->
+    <appender name="systemTraceFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/trace/${log-name}-trace.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log-patten}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>TRACE</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--error日志-->
+    <appender name="systemErrorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/error/${log-name}-error.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log-patten}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--info日志-->
+    <appender name="systemInfoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/info/${log-name}-info.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <!-- 日志输出格式 -->
+            <pattern>${log-patten}</pattern>
+            <!-- 日志编码 -->
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--warn日志-->
+    <appender name="systemWarnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/warn/${log-name}-warn.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <!-- 日志输出格式 -->
+            <pattern>${log-patten}</pattern>
+            <!-- 日志编码 -->
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--重大故障日志-->
+    <appender name="systemFatalFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${log-dir}/%d{yyyy-MM-dd}/${log-type-system}/fatal/${log-name}-fatal.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <MaxHistory>${log-max-history}</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log-max-file-size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <cleanHistoryOnStart>${log-clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <!-- 日志输出格式 -->
+            <pattern>${log-patten}</pattern>
+            <!-- 日志编码 -->
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>FATAL</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>系统日志 end<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+
+    <!--
+        指定[哪个包]下使用[哪个appender],并设置 记录到日志文件中的日志的最下
+        级别(低于次级别的日志信息不回输出记录到日志文件中)
+        注:日志级别有: trace|debug|info|warn|error|fatal
+        注:当有多处指定了要记录的日志的最下日志级别时，走优先级最高的，优先级:logback-spring.xml中 > 启动jar包时 > xxx.properties/xxx.yml中
+    -->
+    <!--    <logger name="com.itc.api.core" level="info"/>-->
+
+
+    <!--
+        root:logger的根节点,appender-ref:确定使用哪个appender,将日志信息显示在console
+        注:如果不指定配置此项的话,那么SpringBoot启动后,将不会在console打印任何信息
+    -->
+    <root level="info">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="systemTraceFileAppender"/>
+        <appender-ref ref="systemDebugFileAppender"/>
+        <appender-ref ref="systemInfoFileAppender"/>
+        <appender-ref ref="systemWarnFileAppender"/>
+        <appender-ref ref="systemErrorFileAppender"/>
+        <appender-ref ref="systemFatalFileAppender"/>
+    </root>
+</configuration>
