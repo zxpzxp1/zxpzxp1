@@ -14,7 +14,7 @@ gen
 /data/
 /build/
 /packages/
-
+/*.log
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
