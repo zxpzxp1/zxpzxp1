@@ -35,6 +35,7 @@ public class UserInfoController {
     @PostMapping("login")
     public Result login(@RequestBody LoginVo loginVo, HttpServletRequest request){
         String token = userInfoService.login(loginVo);
+        request.setAttribute("token",token);
         return Result.ok(token);
     }
 

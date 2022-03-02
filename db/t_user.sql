@@ -39,8 +39,9 @@ INSERT INTO `t_user` VALUES ('1', 'admin', '$2a$10$2KCqRbra0Yn2TwvkZxtfLuWuUP5Ky
 
 CREATE TABLE `t_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` varchar(255),
-  `msg` text DEFAULT NULL COMMENT '留言板',
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `msg` text COMMENT '留言板',
+  `child_msg` text,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `i_id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;

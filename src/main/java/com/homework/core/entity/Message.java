@@ -1,7 +1,11 @@
 package com.homework.core.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.homework.core.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.persistence.Table;
 
 /**
  * @className: User
@@ -11,8 +15,8 @@ import lombok.Data;
  **/
 
 @Data
-public class Message {
-    private int id;
+@TableName("t_message")
+public class Message  extends BaseEntity {
     @ApiModelProperty("用户编号")
     private String userId;
     @ApiModelProperty("信息")

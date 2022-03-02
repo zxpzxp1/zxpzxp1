@@ -13,5 +13,7 @@ import com.homework.core.vo.MessageVo;
 public interface MessageService extends IService<Message> {
     public void save(MessageVo vo);
 
+    public void saveChild(String id,String userId,String Msg);
+
     public void update(MessageVo vo);
 }

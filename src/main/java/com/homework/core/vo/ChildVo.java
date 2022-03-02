@@ -12,22 +12,12 @@ import lombok.Data;
  ***/
 
 @Data
-@ApiModel(description="信息对象")
-public class MessageVo {
-    private int id;
-
+@ApiModel(description="子信息对象")
+public class ChildVo {
     @ApiModelProperty(value = "用户id")
     private String userId;
 
     @ApiModelProperty(value = "信息")
     private String msg;
-
-    @ApiModelProperty(value = "子信息标志")
-    private String hasChild;
-
-    @ApiModelProperty(value = "子信息")
-    private String childMsg;//userId,hasChild,msg
-
-
 
 }
