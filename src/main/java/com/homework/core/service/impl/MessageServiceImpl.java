@@ -48,6 +48,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         Message message = this.getById(id);
 
         JSONObject jsonObject=new JSONObject();
+        //json {userid:1,msg:content}
         jsonObject.put("userid",userId);
         jsonObject.put("msg",msg);
 
