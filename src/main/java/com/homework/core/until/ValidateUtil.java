@@ -1,7 +1,6 @@
 package com.homework.core.until;
 
 import com.homework.core.exception.BusException;
-import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.homework.common.bean.ResultCodeEnum.USERRULE;

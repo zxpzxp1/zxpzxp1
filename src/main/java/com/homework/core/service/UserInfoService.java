@@ -5,7 +5,6 @@ import com.homework.core.entity.UserInfo;
 import com.homework.core.vo.LoginVo;
 import com.homework.core.vo.RegisterVo;
 
-import java.util.Map;
 
 /****
  *  @title: UserInfoService
