@@ -1,5 +1,7 @@
 package com.homework.core.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.homework.core.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,14 +13,14 @@ import lombok.Data;
  **/
 
 @Data
-public class User {
-    private int id;
+@TableName("t_user_info")
+public class UserInfo extends BaseEntity {
     @ApiModelProperty("账号")
-    private String username;
+    private String name;
     @ApiModelProperty("密码")
     private String password;
-    @ApiModelProperty("角色：0-普通用户、1-管理员")
-    private String role;
-    @ApiModelProperty("权限：执行器ID列表，多个逗号分割")
-    private String permission;
+    @ApiModelProperty("邮箱")
+    private String email;
+    @ApiModelProperty("状态")
+    private Integer status;
 }

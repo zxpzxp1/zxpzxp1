@@ -42,8 +42,8 @@ public class Swagger3Config {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("图像数据质量评估 API文档")
-                .description("图像数据质量评估 API文档")
+                .title("留言板 API文档")
+                .description("留言板 API文档")
                 .version("1.0")
                 .build();
     }
