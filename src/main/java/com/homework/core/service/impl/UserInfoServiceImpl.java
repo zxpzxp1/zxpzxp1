@@ -109,6 +109,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,UserInfo> im
         userInfo.setEmail(registerVo.getEmail());
         userInfo.setPassword(MD5.encrypt(password));
         userInfo.setStatus(1);
+        userInfo.setIsDeleted(0);
         this.save(userInfo);
     }
 

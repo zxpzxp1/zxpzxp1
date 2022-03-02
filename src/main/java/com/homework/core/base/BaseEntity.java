@@ -23,7 +23,7 @@ import java.util.Map;
 public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "id")
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private int id;
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

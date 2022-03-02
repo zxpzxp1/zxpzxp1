@@ -13,7 +13,7 @@ public class JwtHelper {
     private static String tokenSignKey = "123456";
 
     //根据参数生成token
-    public static String createToken(Long userId, String userName) {
+    public static String createToken(int userId, String userName) {
         String token = Jwts.builder()
                 .setSubject("Project-USER")
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
@@ -45,7 +45,7 @@ public class JwtHelper {
     }
 
     public static void main(String[] args) {
-        String token = JwtHelper.createToken(1L, "lucy");
+        String token = JwtHelper.createToken(1, "lucy");
         System.out.println(token);
         System.out.println(JwtHelper.getUserId(token));
         System.out.println(JwtHelper.getUserName(token));

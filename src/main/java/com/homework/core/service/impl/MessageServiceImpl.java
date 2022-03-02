@@ -13,6 +13,7 @@ import com.homework.core.vo.MessageVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,30 +37,34 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         message.setUserId(userId);
         message.setMsg(msg);
         message.setChildMsg(childMsg);
+        message.setIsDeleted(0);
         if (id==0){
             this.baseMapper.insert(message);
         }
     }
 
     @Override
-    public void saveChild(String id, String userId, String msg) {
-        List<Map<String,Object>> chidMsgList= Lists.newArrayList();
-        Message message = this.baseMapper.selectById(id);
-        HashMap<String,Object> map= new HashMap<>();
-        ChildVo vo=new ChildVo();
-        vo.setUserId(userId);
-        vo.setMsg(msg);
-        map.put(id,vo);
+    public void saveChild(int id, String userId, String msg) {
+        Message message = this.getById(id);
+
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("userid",userId);
+        jsonObject.put("msg",msg);
+
+
+        List<JSONObject> jsonObjects=Lists.newArrayList();
         if (StringUtils.isEmpty(message.getChildMsg())){
-            chidMsgList.add(map);
+            jsonObjects.add(jsonObject);
         }else{
             String childMsg = message.getChildMsg();
-            JSONObject jsonObject = JSONArray.parseObject(childMsg);
+            jsonObjects = JSONArray.parseArray(childMsg).toJavaList(JSONObject.class);
+            jsonObjects.add(jsonObject);
 
         }
-        String strChild = chidMsgList.toString();
+        String strChild = jsonObjects.toString();
         message.setChildMsg(strChild);
-        this.baseMapper.updateById(message);
+        this.updateById(message);
+
     }
 
     @Override
@@ -69,7 +74,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         int id = vo.getId();
         String childMsg=vo.getChildMsg();
         Message message=new Message();
-        message.setId((long)id);
+        message.setId(id);
         message.setUserId(userId);
         message.setMsg(msg);
         message.setMsg(childMsg);

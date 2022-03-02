@@ -1,5 +1,6 @@
 package com.homework.core.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.homework.core.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.Data;
  **/
 
 @Data
+@TableName("t_user_info")
 public class UserInfo extends BaseEntity {
     @ApiModelProperty("账号")
     private String name;

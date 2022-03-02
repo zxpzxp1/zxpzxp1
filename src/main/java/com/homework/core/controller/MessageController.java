@@ -1,6 +1,7 @@
 package com.homework.core.controller;
 
 import com.homework.common.bean.Result;
+import com.homework.core.entity.Message;
 import com.homework.core.entity.UserInfo;
 import com.homework.core.service.MessageService;
 import com.homework.core.until.AuthContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @className: MessageController
@@ -33,8 +35,8 @@ public class MessageController {
     @ApiOperation("显示留言信息")
     public Result list(HttpServletRequest request) {
         Long userId = AuthContextHolder.getUserId(request);
-
-        return Result.ok();
+        List<Message> list = messageService.list();
+        return Result.ok(list);
     }
     @PostMapping("/add")
     @ApiOperation("添加留言信息")
@@ -46,7 +48,7 @@ public class MessageController {
     }
     @PostMapping("/addChild")
     @ApiOperation("添加子留言信息")
-    public Result addChild(String id, String userId, String msg){
+    public Result addChild(int id, String userId, String msg){
         messageService.saveChild(id,userId,msg);
         return Result.ok();
     }
