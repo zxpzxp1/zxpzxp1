@@ -1,7 +1,7 @@
 package com.homework.core.controller;
 
-import com.homework.common.bean.ReturnT;
-import com.homework.core.entity.User;
+import com.homework.common.bean.Result;
+import com.homework.core.entity.UserInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
     @PostMapping("/add")
     @ApiOperation("添加用户")
-    public ReturnT<String> add(@RequestBody User user) {
-        return ReturnT.SUCCESS;
+    public Result add(@RequestBody UserInfo user) {
+        return Result.ok();
     }
 }
