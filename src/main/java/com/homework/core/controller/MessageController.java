@@ -36,6 +36,13 @@ public class MessageController {
                        @ApiParam(name = "limit", value = "每页记录数", required = true) @PathVariable long limit) {
         Long userId = AuthContextHolder.getUserId(request);
         IPage<Message> list = messageService.selectPage(current,limit);
+        List<Message> records = list.getRecords();
+        for (int i = 0; i <records.size() ; i++) {
+            int id = records.get(i).getId();
+
+
+        }
+
         return Result.ok(list);
     }
     @PostMapping("/add")

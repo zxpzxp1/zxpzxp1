@@ -24,6 +24,7 @@ public class MessageVo {
 
 
     @ApiModelProperty(value = "子信息")
+    //[{"msg":"{userid:1,msg:content}","userid":"1"}, {"msg":"{userid:1,msg:content2}","userid":"1"}, {"msg":"{userid:1,msg:content23}","userid":"1"}, {"msg":"{userid:1,msg:content234}","userid":"1"}, {"msg":"{userid:11,msg:content234}","userid":"1"}]
     private String childMsg;//json {userId,msg}
 
 
