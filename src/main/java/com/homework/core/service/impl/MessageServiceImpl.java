@@ -13,10 +13,7 @@ import com.homework.core.vo.MessageVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /****
@@ -38,6 +35,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         message.setMsg(msg);
         message.setChildMsg(childMsg);
         message.setIsDeleted(0);
+        message.setCreateTime(new Date());
         if (id==0){
             this.baseMapper.insert(message);
         }
@@ -63,6 +61,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         }
         String strChild = jsonObjects.toString();
         message.setChildMsg(strChild);
+        message.setUpdateTime(new Date());
         this.updateById(message);
 
     }
@@ -78,6 +77,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         message.setUserId(userId);
         message.setMsg(msg);
         message.setMsg(childMsg);
+        message.setUpdateTime(new Date());
         this.saveOrUpdate(message);
     }
 
