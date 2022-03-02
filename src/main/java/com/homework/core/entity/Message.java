@@ -13,9 +13,11 @@ import lombok.Data;
 @Data
 public class Message {
     private int id;
-    @ApiModelProperty("父编号")
-    private String parent;
+    @ApiModelProperty("用户编号")
+    private String userId;
     @ApiModelProperty("信息")
     private String msg;
+    @ApiModelProperty("子信息")
+    private String childMsg;
 
 }

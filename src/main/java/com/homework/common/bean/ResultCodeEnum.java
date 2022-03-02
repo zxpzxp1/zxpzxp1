@@ -35,13 +35,13 @@ public enum ResultCodeEnum {
     CANCEL_ORDER_FAIL(225, "取消订单失败"),
     CANCEL_ORDER_NO(225, "不能取消预约"),
 
-    HOSCODE_EXIST(230, "医院编号已经存在"),
-    NUMBER_NO(240, "可预约号不足"),
-    TIME_NO(250, "当前时间不可以预约"),
+    USERRULE(230, "用户名规则不满足"),
+    PASSWORDRULE(240, "密码规则不满足"),
 
-    SIGN_ERROR(300, "签名错误"),
-    HOSPITAL_OPEN(310, "医院未开通，暂时不能访问"),
-    HOSPITAL_LOCK(320, "医院被锁定，暂时不能访问"),
+
+    SIGN_ERROR(300, "邮箱重复"),
+    USER_OPEN(301, "用户名重复"),
+    EMAIL_ERROR(302, "用户名重复"),
     ;
 
     private Integer code;

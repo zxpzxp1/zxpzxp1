@@ -3,6 +3,7 @@ package com.homework.core.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.homework.core.entity.UserInfo;
 import com.homework.core.vo.LoginVo;
+import com.homework.core.vo.RegisterVo;
 
 import java.util.Map;
 
@@ -14,4 +15,6 @@ import java.util.Map;
  ***/
 public interface UserInfoService extends IService<UserInfo> {
     String login(LoginVo loginVo);
+
+    public void register(RegisterVo registerVo);
 }

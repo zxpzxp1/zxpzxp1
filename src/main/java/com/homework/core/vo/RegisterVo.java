@@ -5,15 +5,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /****
- *  @title: loginVo
+ *  @title: 注册vo
  *  @projectName Bulletinboard
  **    @author zxp
  *     @date 2022/3/2 9:27
  ***/
 
 @Data
-@ApiModel(description="登录对象")
-public class LoginVo {
+@ApiModel(description="注册对象")
+public class RegisterVo {
     @ApiModelProperty(value = "用户名")
     private String username;
 
@@ -22,5 +22,7 @@ public class LoginVo {
 
     @ApiModelProperty(value = "密码")
     private String password;
+
+
 
 }

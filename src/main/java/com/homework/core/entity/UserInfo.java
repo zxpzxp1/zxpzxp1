@@ -1,5 +1,6 @@
 package com.homework.core.entity;
 
+import com.homework.core.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,12 +12,13 @@ import lombok.Data;
  **/
 
 @Data
-public class UserInfo {
-    private long id;
+public class UserInfo extends BaseEntity {
     @ApiModelProperty("账号")
-    private String username;
+    private String name;
     @ApiModelProperty("密码")
     private String password;
     @ApiModelProperty("邮箱")
     private String email;
+    @ApiModelProperty("状态")
+    private Integer status;
 }

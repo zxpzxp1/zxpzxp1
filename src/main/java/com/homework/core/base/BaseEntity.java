@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Map;
  **    @author zxp
  *     @date 2022/3/2 9:35
  ***/
+@Data
 public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "id")
     @TableId(type = IdType.AUTO)
