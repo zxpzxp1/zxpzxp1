@@ -17,6 +17,7 @@ import com.homework.core.vo.RegisterVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -110,6 +111,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,UserInfo> im
         userInfo.setPassword(MD5.encrypt(password));
         userInfo.setStatus(1);
         userInfo.setIsDeleted(0);
+        userInfo.setUpdateTime(new Date());
+        userInfo.setUpdateTime(new Date());
         this.save(userInfo);
     }
 

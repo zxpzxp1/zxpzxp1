@@ -3,6 +3,8 @@ package com.homework.core.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import com.homework.core.entity.Message;
@@ -79,6 +81,19 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper,Message> imple
         message.setMsg(childMsg);
         message.setUpdateTime(new Date());
         this.saveOrUpdate(message);
+    }
+
+    @Override
+    public IPage<Message> selectPage(long current, long limit) {
+        //创建page对象，传递当前页，每页记录数
+        Page<Message> page=new Page<>(current,limit);
+        //构建条件
+        QueryWrapper<Message> wrapper=new QueryWrapper<>();
+        wrapper.orderByDesc("create_time","update_time");
+        //调用方法实现分页查询
+        IPage<Message> pageMessage = this.page(page, wrapper);
+        //返回结果
+        return pageMessage;
     }
 
 

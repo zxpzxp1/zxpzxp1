@@ -1,8 +1,12 @@
 package com.homework.core.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.homework.core.entity.Message;
 import com.homework.core.vo.MessageVo;
+
+import java.util.List;
 
 /****
  *  @title: MessageService
@@ -16,4 +20,6 @@ public interface MessageService extends IService<Message> {
     public void saveChild(int id,String userId,String Msg);
 
     public void update(MessageVo vo);
+
+    IPage<Message> selectPage(long current, long limit);
 }

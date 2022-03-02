@@ -22,11 +22,9 @@ public class MessageVo {
     @ApiModelProperty(value = "信息")
     private String msg;
 
-    @ApiModelProperty(value = "子信息标志")
-    private String hasChild;
 
     @ApiModelProperty(value = "子信息")
-    private String childMsg;//userId,hasChild,msg
+    private String childMsg;//json {userId,msg}
 
 
 
