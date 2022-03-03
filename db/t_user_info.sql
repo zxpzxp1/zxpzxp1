@@ -1,20 +1,6 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : local
-Source Server Version : 80016
-Source Host           : localhost:3306
-Source Database       : sjyz
-
-Target Server Type    : MYSQL
-Target Server Version : 80016
-File Encoding         : 65001
-
-Date: 2022-03-02 17:05:06
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
-
+CREATE DATABASE IF NOT EXISTS `bbs` CHARACTER SET utf8;
+USE `bbs`;
 -- ----------------------------
 -- Table structure for t_user_info
 -- ----------------------------
@@ -31,4 +17,18 @@ CREATE TABLE `t_user_info` (
   `is_deleted` tinyint(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除(1:已删除，0:未删除)',
   PRIMARY KEY (`id`),
   KEY `uk_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+-- ----------------------------
+DROP TABLE IF EXISTS `t_message`;
+CREATE TABLE `t_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言编号主键',
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `msg` text COMMENT '留言板内容',
+  `child_msg` text COMMENT '子留言板内容',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `is_deleted` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `i_id` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
