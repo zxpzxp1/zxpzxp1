@@ -26,10 +26,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class StartupApplication {
     private static Logger logger = LoggerFactory.getLogger(StartupApplication.class);
     public static void main(String[] args) {
-        String path = "http://127.0.0.1:3333/doc.html";
+        String path = "http://127.0.0.1:1000/doc.html";
         SpringApplication.run(StartupApplication.class, args);
         logger.info(
-                "\nAccess URLs:\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\t"
+                "\n接口访问文件Access URLs:\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\t"
                         + path + "\n\t" +
                         "\t\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\t"
         );
