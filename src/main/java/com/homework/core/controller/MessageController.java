@@ -39,7 +39,7 @@ public class MessageController {
         return Result.ok(list);
     }
     @PostMapping("/add")
-    @ApiOperation("添加留言信息")
+    @ApiOperation("添加主留言信息")
     public Result add(@RequestBody MessageVo vo, HttpServletRequest request) {
       //  Long userId = AuthContextHolder.getUserId(request);
       //  vo.setUserId(Long.toString(userId));
